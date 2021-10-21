@@ -1,0 +1,44 @@
+---
+title: "toolik-chlorophyll_summary"
+author: "Nikhil D."
+date: "10/21/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(here)
+library(janitor)
+library(skimr)
+```
+
+```{r}
+toolik_chlorophyll <- read_csv(here::here("data", "data-raw", "toolik_chlorophyll.csv"))
+
+# summary
+skim(toolik_chlorophyll)
+
+# clean up 
+toolik_chlorophyll <- toolik_chlorophyll %>% clean_names()
+toolik_chlorophyll
+
+toolik_chlorophyll$pprod_mg_available_c_m3_d <- as.numeric(toolik_chlorophyll$pprod_mg_available_c_m3_d)
+
+toolik_chlorophyll
+```
+```{r}
+toolik_depth_chloro_plot <- ggplot(data = toolik_chlorophyll, aes(x = depth, y = pprod_mg_available_c_m3_d)) +
+  geom_jitter(aes(color = depth), show.legend = TRUE) +
+  scale_color_gradient(low = "blue", high = "black") +
+  theme_minimal()+
+  theme(plot.title = element_text(hjust = 0.5))+
+  labs(title = "Toolik Chlorophyll concentration (ug/Liter/day) vs Depth (meter)",
+       x = "Depth (meters)",
+       y = "Chlorophyll concentration \n(ug/Liter/day)")
+
+toolik_depth_chloro_plot
+```
+
+
+

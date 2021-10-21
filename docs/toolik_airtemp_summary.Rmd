@@ -19,6 +19,8 @@ The data are stored in the `data-raw` subfolder. We'll use `here::here()` to poi
 
 ```{r}
 toolik_weather <- read_csv(here::here("data", "data-raw", "toolik_weather.csv"))
+
+
 ```
 
 
@@ -69,7 +71,8 @@ Let's make a jitterplot of temperatures by month.
 toolik_temp_plot <- ggplot(data = toolik_weather, aes(x = as.factor(month), y = daily_air_temp_mean_c)) +
   geom_jitter(aes(color = daily_air_temp_mean_c), show.legend = FALSE) +
   scale_color_gradient(low = "blue", high = "orange") +
-  theme_minimal() +
+  theme_minimal()+
+  theme(plot.title = element_text(hjust = 0.5))+
   labs(title = "Toolik Station daily air temperature",
        x = "Month",
        y = "Daily mean air temperatures (Celsius)")
