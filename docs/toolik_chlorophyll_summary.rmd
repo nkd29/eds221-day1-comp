@@ -32,8 +32,7 @@ toolik_chlorophyll
 ```{r}
 toolik_depth_chloro_plot <- ggplot(data = toolik_chlorophyll, aes(x = depth, y = pprod_mg_available_c_m3_d)) +
   geom_jitter(aes(color = depth), show.legend = TRUE) +
-  scale_color_gradient(low = "blue", high = "black") +
-  theme_minimal()+
+  scale_color_gradient(low = "skyblue", high = "darkblue") +
   theme(plot.title = element_text(hjust = 0.5))+
   labs(title = "Toolik Chlorophyll concentration (ug/Liter/day) vs Depth (meter)",
        x = "Depth (meters)",
